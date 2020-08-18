@@ -29,6 +29,7 @@ step_timeout = 1200
 codebase_layout = {
     'openxt': r'\openxt',
     'xc-windows': r'\openxt\windows\xc-windows',
+    'msi-installer': r'\openxt\windows\msi-installer',
     'xc-vusb': r'\openxt\windows\xc-windows\xc-vusb',
 }
 

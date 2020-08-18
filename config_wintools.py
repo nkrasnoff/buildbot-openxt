@@ -10,6 +10,11 @@ codebases_wintools = {
         'branch': 'build-fixes-0',
         'revision': '',
     },
+    'msi-installer': {
+        'repository': 'git://github.com/eric-ch/msi-installer.git',
+        'branch': 'build-fixes-0',
+        'revision': '',
+    },
     'xc-vusb': {
         'repository': 'git://github.com/OpenXT/xc-vusb.git',
         'branch': 'master',
