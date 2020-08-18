@@ -41,8 +41,8 @@ codebases_stable_zeus = {
         'revision': '',
     },
     'meta-openxt-ocaml-platform': {
-        'repository': 'git://github.com/eric-ch/meta-openxt-ocaml-platform.git',
-        'branch': 'oxt-1787',
+        'repository': 'git://github.com/OpenXT/meta-openxt-ocaml-platform.git',
+        'branch': 'master',
         'revision': '',
     },
     'xenclient-oe': {

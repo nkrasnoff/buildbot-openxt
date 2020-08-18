@@ -2,12 +2,12 @@
 codebases_wintools = {
     'openxt': {
         'repository': 'git://github.com/eric-ch/openxt.git',
-        'branch': 'wip',
+        'branch': 'build-fixes-1',
         'revision': '',
     },
     'xc-windows': {
         'repository': 'git://github.com/eric-ch/xc-windows.git',
-        'branch': 'wip',
+        'branch': 'build-fixes-0',
         'revision': '',
     },
     'xc-vusb': {
