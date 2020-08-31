@@ -1,4 +1,4 @@
-# Source configuration for OpenXT 10 stable.
+# Source configuration for OpenXT Zeus stable.
 codebases_stable_zeus = {
     'bitbake': {
         'repository': 'git://git.openembedded.org/bitbake',
@@ -37,22 +37,22 @@ codebases_stable_zeus = {
     },
     'meta-openxt-haskell-platform': {
         'repository': 'git://github.com/OpenXT/meta-openxt-haskell-platform.git',
-        'branch': 'master',
+        'branch': 'zeus',
         'revision': '',
     },
     'meta-openxt-ocaml-platform': {
         'repository': 'git://github.com/OpenXT/meta-openxt-ocaml-platform.git',
-        'branch': 'master',
+        'branch': 'zeus',
         'revision': '',
     },
     'xenclient-oe': {
-        'repository': 'git://github.com/eric-ch/xenclient-oe.git',
+        'repository': 'git://github.com/OpenXT/xenclient-oe.git',
         'branch': 'zeus',
         'revision': '',
     },
     'bordel': {
         'repository': 'git://github.com/eric-ch/bordel.git',
-        'branch': 'zeus',
+        'branch': 'autobuild',
         'revision': '',
     },
 }
