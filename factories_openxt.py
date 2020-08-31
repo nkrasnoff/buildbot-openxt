@@ -56,7 +56,8 @@ def step_bordel_config(workdir, template):
     return steps.ShellCommand(
         workdir=workdir,
         command=[ './openxt/bordel/bordel', '-i', '0', 'config',
-            '--default', '--force', '--rmwork', '-t', template ],
+            '--default', '--force', '--rmwork', '--no-repo-branch',
+            '-t', template ],
         haltOnFailure=True, name='Configure source tree')
 
 def step_set_build_id(workdir):
