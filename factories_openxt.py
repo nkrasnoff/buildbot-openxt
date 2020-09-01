@@ -60,13 +60,21 @@ def step_bordel_config(workdir, template):
             '-t', template ],
         haltOnFailure=True, name='Configure source tree')
 
+def step_bordel_config_legacy(workdir, template):
+    return steps.ShellCommand(
+        workdir=workdir,
+        command=[ './openxt/bordel/bordel', '-i', '0', 'config',
+            '--default', '--force', '--rmwork',
+            '-t', template ],
+        haltOnFailure=True, name='Configure source tree')
+
 def step_set_build_id(workdir):
     return steps.ShellCommand(
         workdir=workdir,
         #hideStepIf=lambda results, s: results==SUCCESS,
         name='Set build ID',
         haltOnFailure=True,
-        command=[ 'sed', '-ie',
+        command=[ 'sed', '-i', '-e',
             util.Interpolate("s:^OPENXT_BUILD_ID\s*=.*:OPENXT_BUILD_ID=\"%(prop:buildnumber)s\":"),
             './build-0/conf/openxt.conf'])
 
@@ -229,7 +237,7 @@ def factory_custom_legacy(workdir_fmt, deploy_base, codebases_oe):
     # Builder environment setup (handle first builds).
     f.addStep(step_init_tree(util.Interpolate(workdir_fmt)))
     # Build using bordel.
-    f.addStep(step_bordel_config(util.Interpolate(workdir_fmt),
+    f.addStep(step_bordel_config_legacy(util.Interpolate(workdir_fmt),
         util.Interpolate("%(prop:template)s")))
     f.addStep(step_set_build_id(util.Interpolate(workdir_fmt)))
     f.addStep(step_bordel_build(util.Interpolate(workdir_fmt)))
