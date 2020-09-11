@@ -338,4 +338,5 @@ def factory_stable(workdir_base, deploy_base, codebases_stable):
     f.addStep(step_bordel_deploy(util.Interpolate(workdir_fmt)))
     f.addStep(step_upload_installer(workdir_fmt, deploy_base))
     f.addStep(step_upload_upgrade(workdir_fmt, deploy_base))
+    f.addStep(step_remove_history(workdir_base))
     return f
