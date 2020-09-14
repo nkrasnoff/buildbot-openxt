@@ -24,10 +24,10 @@ def scheduler_force_repo(name, builders, manifest_dfl, template_dfl, codebases_r
             )
         ])
 
-def scheduler_force_custom(name, builders, template_dfl, codebases_custom):
+def scheduler_force_custom(name, buttonName, builders, template_dfl, codebases_custom):
     return schedulers.ForceScheduler(
         name=name,
-        buttonName="Custom build",
+        buttonName=buttonName,
         label="Manual Custom build",
         reason=util.StringParameter(
             name="reason", label="Reason:", required=False, size=140
