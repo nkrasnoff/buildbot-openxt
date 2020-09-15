@@ -10,18 +10,17 @@ step_timeout = 5030
 # - Requires read access to the certificates to sign the build.
 # - Requires read/write access to the download cache.
 # The autobuilder tree should look like:
+# | certs/
 # | workdir_base/
-# | workdir_base/certs/
-# | workdir_base/certs/*.pem
 # | workdir_base/downloads
 # | workdir_base/<ver>-custom-quick
-# | workdir_base/<ver>-custom-quick/certs -> ../certs
+# | workdir_base/<ver>-custom-quick/certs -> ../../certs
 # | workdir_base/<ver>-custom-quick/downloads -> ../downloals
 # | workdir_base/<ver>-custom-clean
-# | workdir_base/<ver>-custom-clean/certs -> ../certs
+# | workdir_base/<ver>-custom-clean/certs -> ../../certs
 # | workdir_base/<ver>-custom-clean/downloads -> ../downloads
 # | workdir_base/<ver>-stable
-# | workdir_base/<ver>-stable/certs -> ../certs
+# | workdir_base/<ver>-stable/certs -> ../../certs
 # | workdir_base/<ver>-stable/downloads -> ../downloads
 
 # Steps wrappers.
@@ -36,7 +35,7 @@ def step_init_tree(workdir):
                 haltOnFailure=True, logfile='stdio'),
             util.ShellArg(command=['ln', '-sfT', '../downloads', 'downloads'],
                 haltOnFailure=True, logfile='stdio'),
-            util.ShellArg(command=['ln', '-sfT', '../certs', 'certs'],
+            util.ShellArg(command=['ln', '-sfT', '../../certs', 'certs'],
                 haltOnFailure=True, logfile='stdio')
         ])
 
