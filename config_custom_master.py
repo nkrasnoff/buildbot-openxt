@@ -2,7 +2,7 @@
 codebases_custom_master = {
     'bitbake': {
         'repository': 'git://git.openembedded.org/bitbake',
-        'branch': '1.46',
+        'branch': '1.44',
         'revision': '',
     },
     'meta-openembedded': {
