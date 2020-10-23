@@ -73,8 +73,9 @@ def step_set_build_id(workdir):
         #hideStepIf=lambda results, s: results==SUCCESS,
         name='Set build ID',
         haltOnFailure=True,
-        command=[ 'sed', '-i', '-e',
-            util.Interpolate("s:^OPENXT_BUILD_ID\s*=.*:OPENXT_BUILD_ID=\"%(prop:buildnumber)s\":"),
+        command=[ 'sed', '-i',
+            '-e', util.Interpolate("s:^OPENXT_BUILD_ID\s*=.*:OPENXT_BUILD_ID=\"%(prop:buildnumber)s\":"),
+            '-e', util.Interpolate("s:^OPENXT_VERSION\s*=.*:OPENXT_VERSION=\"%(prop:buildername)s\":"),
             './build-0/conf/openxt.conf'])
 
 def step_bordel_build(workdir):
