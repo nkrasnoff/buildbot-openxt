@@ -2,32 +2,32 @@
 codebases_custom_master = {
     'bitbake': {
         'repository': 'git://git.openembedded.org/bitbake',
-        'branch': '1.44',
+        'branch': '1.46',
         'revision': '',
     },
     'meta-openembedded': {
         'repository': 'git://git.openembedded.org/meta-openembedded',
-        'branch': 'zeus',
+        'branch': 'dunfell',
         'revision': '',
     },
     'openembedded-core': {
         'repository': 'git://git.openembedded.org/openembedded-core',
-        'branch': 'zeus',
+        'branch': 'dunfell',
         'revision': '',
     },
     'meta-intel': {
         'repository': 'git://git.yoctoproject.org/meta-intel',
-        'branch': 'zeus',
+        'branch': 'dunfell',
         'revision': '',
     },
     'meta-java': {
         'repository': 'git://git.yoctoproject.org/meta-java',
-        'branch': 'zeus',
+        'branch': 'dunfell',
         'revision': '',
     },
     'meta-selinux': {
         'repository': 'git://git.yoctoproject.org/meta-selinux',
-        'branch': 'zeus',
+        'branch': 'dunfell',
         'revision': '',
     },
     'meta-virtualization': {
