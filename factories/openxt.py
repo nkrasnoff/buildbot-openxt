@@ -108,6 +108,48 @@ def step_upload_upgrade(srcfmt, destfmt):
         masterdest=util.Interpolate(destpath + "/respository"),
         url=None)
 
+# Clean sstate of recipes that cause problems as mirror
+def step_clean_problematic(workfmt):
+    return [
+        steps.ShellSequence(
+            workdir=util.Interpolate(workfmt + "/build-0"),
+            name='Clean problematic sstate',
+            env={
+                'BB_ENV_EXTRAWHITE': "MACHINE DISTRO BUIILD_UID LAYERS_DIR",
+                'LAYERS_DIR': util.Interpolate(workfmt + "/build-0/layers"),
+                'BUILDDIR': util.Interpolate(workfmt + "/build-0"),
+                'PATH': [ util.Interpolate(workfmt + "/build-0/layers/bitbake/bin"),
+                          "${PATH}"],
+                'MACHINE': "xenclient-dom0"
+            },
+            haltOnFailure=True,
+            commands=[
+                util.ShellArg(command=[ 'bitbake', 'ocaml-cross-x86_64',
+                    '-c', 'cleansstate' ],
+                    haltOnFailure=True),
+                util.ShellArg(command=[ 'bitbake', 'findlib-cross-x86_64',
+                    '-c', 'cleansstate' ],
+                    haltOnFailure=True)
+            ]
+        ),
+        steps.ShellCommand(
+            workdir=util.Interpolate(workfmt + "/build-0"),
+            name='Clean problematic sstate',
+            env={
+                'BB_ENV_EXTRAWHITE': "MACHINE DISTRO BUIILD_UID LAYERS_DIR",
+                'LAYERS_DIR': util.Interpolate(workfmt + "/build-0/layers"),
+                'BUILDDIR': util.Interpolate(workfmt + "/build-0"),
+                'PATH': [ util.Interpolate(workfmt + "/build-0/layers/bitbake/bin"),
+                          "${PATH}"],
+                'MACHINE': "openxt-installer"
+            },
+            command=[ 'bitbake', 'xenclient-installer-image', '-c', 'cleansstate'],
+            haltOnFailure=True
+        )
+    ]
+
+
+
 # Upload the sstate cache to the build-master.
 def step_upload_sstate(srcfmt, destfmt):
     destpath = destfmt + "/%(prop:buildername)s/sstate"
@@ -308,6 +350,7 @@ def factory_stable(workdir_base, deploy_base, codebases_stable, deploy_sstate):
     f.addStep(step_upload_installer(workdir_fmt, deploy_base))
     f.addStep(step_upload_upgrade(workdir_fmt, deploy_base))
     if deploy_sstate:
+        f.addSteps(step_clean_problematic(workdir_fmt))
         f.addStep(step_upload_sstate(workdir_fmt, deploy_base))
     f.addStep(step_remove_history(workdir_base))
     return f
