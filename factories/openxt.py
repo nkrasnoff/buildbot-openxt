@@ -108,6 +108,14 @@ def step_upload_upgrade(srcfmt, destfmt):
         masterdest=util.Interpolate(destpath + "/respository"),
         url=None)
 
+# Upload the sstate cache to the build-master.
+def step_upload_sstate(srcfmt, destfmt):
+    destpath = destfmt + "/%(prop:buildername)s/sstate"
+    return steps.DirectoryUpload(
+        workersrc=util.Interpolate(srcfmt + "/build-0/sstate-cache"),
+        masterdest=util.Interpolate(destpath),
+        url=None)
+
 # Layout of the codebases for the different repositories for bordel.
 codebase_layout = {
     'bats-suite': '/openxt/bats-suite',
@@ -275,7 +283,7 @@ def factory_custom_legacy_clean(workdir_base, deploy_base, codebases_oe):
 # "stable" will run a build using only the Openembedded resources.
 # No externalsrc involved and the recipes dictate what OE will fetch.
 # Only the download cache is re-used, each build start from a fresh sstate.
-def factory_stable(workdir_base, deploy_base, codebases_stable):
+def factory_stable(workdir_base, deploy_base, codebases_stable, deploy_sstate):
     workdir_fmt = workdir_base + "/%(prop:buildername)s-%(prop:buildnumber)s"
     f = util.BuildFactory()
     # Fetch sources.
@@ -299,5 +307,7 @@ def factory_stable(workdir_base, deploy_base, codebases_stable):
     f.addStep(step_bordel_deploy(util.Interpolate(workdir_fmt)))
     f.addStep(step_upload_installer(workdir_fmt, deploy_base))
     f.addStep(step_upload_upgrade(workdir_fmt, deploy_base))
+    if deploy_sstate:
+        f.addStep(step_upload_sstate(workdir_fmt, deploy_base))
     f.addStep(step_remove_history(workdir_base))
     return f
