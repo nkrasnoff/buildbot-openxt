@@ -148,15 +148,21 @@ def step_clean_problematic(workfmt):
         )
     ]
 
-
-
-# Upload the sstate cache to the build-master.
+# Flush and upload the sstate-cache to the build-master.
 def step_upload_sstate(srcfmt, destfmt):
-    destpath = destfmt + "/%(prop:buildername)s/sstate"
-    return steps.DirectoryUpload(
-        workersrc=util.Interpolate(srcfmt + "/build-0/sstate-cache"),
-        masterdest=util.Interpolate(destpath),
-        url=None)
+    destpath = destfmt + "/%(prop:buildername)s/sstate/"
+
+    return [
+        steps.MasterShellCommand(
+            command=[ "rm", "-rf", util.Interpolate(destpath)]
+        ),
+        steps.MultipleFileUpload(
+            workdir=util.Interpolate(srcfmt + '/sstate-cache'),
+            workersrcs=['{:02x}'.format(n) for n in range(256)] + ['debian-10'],
+            masterdest=util.Interpolate(destpath),
+            url=None
+        )
+    ]
 
 # Layout of the codebases for the different repositories for bordel.
 codebase_layout = {
@@ -351,6 +357,6 @@ def factory_stable(workdir_base, deploy_base, codebases_stable, deploy_sstate):
     f.addStep(step_upload_upgrade(workdir_fmt, deploy_base))
     if deploy_sstate:
         f.addSteps(step_clean_problematic(workdir_fmt))
-        f.addStep(step_upload_sstate(workdir_fmt, deploy_base))
+        f.addSteps(step_upload_sstate(workdir_fmt, deploy_base))
     f.addStep(step_remove_history(workdir_base))
     return f
