@@ -17,15 +17,15 @@ def codebases_to_params(codebases):
 #
 # codebaseGenerator and dictionary generation from codebases configurations.
 #
-from config_custom_9 import codebases_custom_9
-from config_custom_zeus import codebases_custom_zeus
-from config_stable_zeus import codebases_stable_zeus
-from config_custom_master import codebases_custom_master
-from config_stable_master import codebases_stable_master
+from config.custom_9 import codebases_custom_9
+from config.custom_zeus import codebases_custom_zeus
+from config.stable_zeus import codebases_stable_zeus
+from config.custom_master import codebases_custom_master
+from config.stable_master import codebases_stable_master
 
-from config_windows_tools import codebases_windows_tools_8_2_0
+from config.windows_tools import codebases_windows_tools_8_2_0
 
-from config_repo import codebases_repo
+from config.repo import codebases_repo
 
 all_repositories = {}
 repo_branches = {}

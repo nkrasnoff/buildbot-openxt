@@ -4,7 +4,7 @@ from buildbot.plugins import (
     schedulers,
     util
 )
-from config import codebases_to_params
+from config.utils import codebases_to_params
 
 def scheduler_force_repo(name, builders, manifest_dfl, template_dfl, codebases_repo):
     return schedulers.ForceScheduler(
