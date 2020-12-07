@@ -23,7 +23,7 @@ from config_stable_zeus import codebases_stable_zeus
 from config_custom_master import codebases_custom_master
 from config_stable_master import codebases_stable_master
 
-from config_wintools import codebases_wintools
+from config_windows_tools import codebases_windows_tools_8_2_0
 
 from config_repo import codebases_repo
 
@@ -35,7 +35,7 @@ for cb in [
         codebases_stable_zeus,
         codebases_custom_master,
         codebases_stable_master,
-        codebases_wintools,
+        codebases_windows_tools_8_2_0,
         codebases_repo ]:
     for name, defaults in cb.items():
         all_repositories[defaults['repository']] = name

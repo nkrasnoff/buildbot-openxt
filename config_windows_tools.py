@@ -1,5 +1,5 @@
-# Source configuration for OpenXT Windows tools. 
-codebases_wintools = {
+# Source configuration for OpenXT Windows tools 8.2.0.
+codebases_windows_tools_8_2_0 = {
     'openxt': {
         'repository': 'git://github.com/OpenXT/openxt.git',
         'branch': 'master',

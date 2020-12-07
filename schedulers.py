@@ -70,7 +70,7 @@ def scheduler_nightly(name, builders, template_dfl, codebases, hour, minute):
         minute=minute,
         onlyIfChanged=True)
 
-def scheduler_force_wintools(name, builders, codebases_wintools):
+def scheduler_force_windows_tools_8_2_0(name, builders, codebases):
     return schedulers.ForceScheduler(
         name=name,
         buttonName="Wintools build",
@@ -79,10 +79,10 @@ def scheduler_force_wintools(name, builders, codebases_wintools):
             name="reason", label="Reason:", required=False, size=140
         ),
         builderNames=builders,
-        codebases=codebases_to_params(codebases_wintools)
+        codebases=codebases_to_params(codebases)
     )
 
-def scheduler_nightly_wintools(name, builders, codebases, hour, minute):
+def scheduler_nightly_windows_tools_8_2_0(name, builders, codebases, hour, minute):
     return schedulers.Nightly(
         name=name,
         codebases=codebases,

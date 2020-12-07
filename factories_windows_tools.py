@@ -33,7 +33,7 @@ codebase_layout = {
     'xc-vusb': r'\openxt\windows\xc-windows\xc-vusb',
 }
 
-def factory_wintools(workdir_base, deploydir, codebases_wintools):
+def factory_windows_tools_8_2_0(workdir_base, deploydir, codebases):
     f = util.BuildFactory()
     f.addStep(steps.ShellSequence(
         hideStepIf=lambda results, s: results==SUCCESS,
@@ -44,7 +44,7 @@ def factory_wintools(workdir_base, deploydir, codebases_wintools):
                 'if', 'not', 'exist' , workdir_base, 'mkdir', workdir_base ],
                 haltOnFailure=True, logfile='stdio')
         ]))
-    for codebase, _ in codebases_wintools.items():
+    for codebase, _ in codebases.items():
         destdir = codebase_layout.get(codebase, '/unknown/' + codebase)
         f.addStep(steps.Git(
             haltOnFailure=True,
@@ -73,7 +73,7 @@ def factory_wintools(workdir_base, deploydir, codebases_wintools):
     f.addStep(steps.FileUpload(
         workersrc=workdir_base + r'\openxt\windows\output\xc-wintools.iso',
         masterdest=util.Interpolate(
-            deploydir + r'/openxt-wintools-%(prop:buildnumber)s.iso'),
+            deploydir + r'/openxt-windows-tools-8.2.0-%(prop:buildnumber)s.iso'),
         url=None
     ))
     return f
