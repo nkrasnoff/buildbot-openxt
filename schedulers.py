@@ -6,24 +6,6 @@ from buildbot.plugins import (
 )
 from config.utils import codebases_to_params
 
-def scheduler_force_repo(name, builders, manifest_dfl, template_dfl, codebases_repo):
-    return schedulers.ForceScheduler(
-        name=name, buttonName="Repo build", label="Manual Repo build",
-        reason=util.StringParameter(
-            name="reason", label="Reason:", required=False, size=140
-        ),
-        builderNames=builders,
-        codebases=codebases_to_params(codebases_repo),
-        properties=[
-            util.StringParameter(
-                name="manifest", label="Manifest File:", default=manifest_dfl
-            ),
-            util.StringParameter(
-                name="template", label="Configuration Template:",
-                default=template_dfl
-            )
-        ])
-
 def scheduler_force_custom(name, buttonName, builders, template_dfl, codebases_custom):
     return schedulers.ForceScheduler(
         name=name,

@@ -260,55 +260,6 @@ def factory_custom_legacy_clean(workdir_base, deploy_base, codebases_oe):
 
 
 #
-# Repo factories
-# "repo" will run a build using Repo tool with the requested manifest from the
-# ui.
-
-# Generic bits.
-def factory_repo(workdir_fmt, deploy_base, codebases_repo):
-    f = util.BuildFactory()
-    # Get the repo manifest specific in the UI.
-    f.addStep(steps.Repo(
-        codebase='openxt-manifest',
-        workdir=util.Interpolate(workdir_fmt),
-        mode='incremental',
-        manifestURL=util.Interpolate('%(src:openxt-manifest:manifestURL)s'),
-        manifestBranch=util.Interpolate('%(src:openxt-manifest:manifestBranch)s'),
-        manifestFile=util.Interpolate("%(prop:manifest)s")
-    ))
-    # Setup the environment and in-tree links.
-    f.addStep(step_init_tree(util.Interpolate(workdir_fmt)))
-    # Build using bordel.
-    f.addStep(step_bordel_config(util.Interpolate(workdir_fmt),
-        util.Interpolate("%(prop:template)s")))
-    f.addStep(step_set_build_id(util.Interpolate(workdir_fmt)))
-    f.addStep(step_bordel_build(util.Interpolate(workdir_fmt)))
-    f.addStep(step_bordel_deploy(util.Interpolate(workdir_fmt)))
-    f.addStep(step_upload_installer(workdir_fmt, deploy_base))
-    f.addStep(step_upload_upgrade(workdir_fmt, deploy_base))
-    return f
-
-# "repo-quick" will try to re-use the downloaded cache and existing sstate.
-# XXX: Fails too often.
-# steps.Repo, regardless of the "mode" will do:
-#   `repo forall -c git clean -f -d -x 2>/dev/null` whatever the mode.
-# Haskell recipes using "cabal" (runghc in fact) will fail with:
-#   `Setup.hs: Run the 'configure' command first.`
-# This is due to runghc relying on configuration artecfacts (dist), but bitbake
-# has no way to track them in S and S gets wiped.
-def factory_repo_quick(workdir_base, deploy_base, codebases_repo):
-    workdir_fmt = workdir_base + "/%(prop:buildername)s"
-    return factory_repo(workdir_fmt, deploy_base, codebases_repo)
-
-# "repo-clean" will only re-use the download cache.
-def factory_repo_clean(workdir_base, deploy_base, codebases_repo):
-    # buildername-buildnumber uniquely identify a build.
-    workdir_fmt = workdir_base + "/%(prop:buildername)s-%(prop:buildnumber)s"
-    f = factory_repo(workdir_fmt, deploy_base, codebases_repo)
-    f.addStep(step_remove_history(workdir_base))
-    return f
-
-#
 # Stable factory.
 # This is only supported post-SRC_URI refactoring.
 # "stable" will run a build using only the Openembedded resources.
