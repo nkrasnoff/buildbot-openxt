@@ -23,7 +23,10 @@ from config.stable_zeus import codebases_stable_zeus
 from config.custom_master import codebases_custom_master
 from config.stable_master import codebases_stable_master
 
-from config.windows_tools import codebases_windows_tools_8_2_0
+from config.windows_tools import (
+    codebases_windows_tools_8_2_0,
+    codebases_windows_tools_9_0_0,
+)
 
 all_repositories = {}
 repo_branches = {}
@@ -33,7 +36,8 @@ for cb in [
         codebases_stable_zeus,
         codebases_custom_master,
         codebases_stable_master,
-        codebases_windows_tools_8_2_0 ]:
+        codebases_windows_tools_8_2_0,
+        codebases_windows_tools_9_0_0 ]:
     for name, defaults in cb.items():
         all_repositories[defaults['repository']] = name
         repo_branches.setdefault(defaults['repository'], []).append(defaults['branch'])
