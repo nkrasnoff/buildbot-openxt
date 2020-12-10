@@ -20,6 +20,8 @@ def codebases_to_params(codebases):
 from config_custom_9 import codebases_custom_9
 from config_custom_zeus import codebases_custom_zeus
 from config_stable_zeus import codebases_stable_zeus
+from config_custom_master import codebases_custom_master
+from config_stable_master import codebases_stable_master
 
 from config_wintools import codebases_wintools
 
@@ -29,8 +31,10 @@ all_repositories = {}
 repo_branches = {}
 for cb in [
         codebases_custom_9,
-        codebases_custom_zeus, 
-        codebases_stable_zeus, 
+        codebases_custom_zeus,
+        codebases_stable_zeus,
+        codebases_custom_master,
+        codebases_stable_master,
         codebases_wintools,
         codebases_repo ]:
     for name, defaults in cb.items():
