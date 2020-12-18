@@ -235,12 +235,12 @@ codebases_custom_master_vglass = {
     },
     'xenclient-oe': {
         'repository': 'git://github.com/eric-ch/xenclient-oe.git',
-        'branch': 'vglass-8',
+        'branch': 'vglass',
         'revision': '',
     },
     'meta-openxt-externalsrc': {
         'repository': 'git://github.com/eric-ch/meta-openxt-externalsrc.git',
-        'branch': 'vglass-1',
+        'branch': 'vglass',
         'revision': '',
     },
     'meta-vglass': {
@@ -270,7 +270,7 @@ codebases_custom_master_vglass = {
     },
     'idl': {
         'repository': 'git://github.com/eric-ch/idl.git',
-        'branch': 'vglass-1',
+        'branch': 'vglass',
         'revision': '',
     },
     'input': {
@@ -300,7 +300,7 @@ codebases_custom_master_vglass = {
     },
     'manager': {
         'repository': 'git://github.com/eric-ch/manager.git',
-        'branch': 'vglass-1',
+        'branch': 'vglass',
         'revision': '',
     },
     'network': {
@@ -325,7 +325,7 @@ codebases_custom_master_vglass = {
     },
     'toolstack-data': {
         'repository': 'git://github.com/eric-ch/toolstack-data.git',
-        'branch': 'vglass-0',
+        'branch': 'vglass',
         'revision': '',
     },
     'toolstack': {
@@ -350,7 +350,7 @@ codebases_custom_master_vglass = {
     },
     'xctools': {
         'repository': 'git://github.com/eric-ch/xctools.git',
-        'branch': 'vglass-2',
+        'branch': 'vglass',
         'revision': '',
     },
     'xsm-policy': {
@@ -369,8 +369,8 @@ codebases_custom_master_vglass = {
         'revision': '',
     },
     'ivc': {
-        'repository': 'https://gitlab.com/ericch/ivc.git',
-        'branch': 'mr-next',
+        'repository': 'https://gitlab.com/vglass/ivc.git',
+        'branch': 'master',
         'revision': '',
     },
     'openxtfb': {
