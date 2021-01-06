@@ -276,7 +276,7 @@ def factory_custom_legacy_clean(workdir_base, deploy_base, codebases_oe):
 # No externalsrc involved and the recipes dictate what OE will fetch.
 # Only the download cache is re-used, each build start from a fresh sstate.
 def factory_stable(workdir_base, deploy_base, codebases_stable):
-    workdir_fmt = workdir_base + "/%(prop:buildername)-%(prop:buildnumber)s"
+    workdir_fmt = workdir_base + "/%(prop:buildername)s-%(prop:buildnumber)s"
     f = util.BuildFactory()
     # Fetch sources.
     for codebase, _ in codebases_stable.items():
